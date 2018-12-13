@@ -1,0 +1,31 @@
+<% include partials/header %>
+<div class="container">
+  <div class="jumbotron">
+    <h1>WELCOME TO THE YELPCAMP!</h1>
+    <p>WE SHOWS BEST CAMPING SITES FROM ALL OVER THE WORLD</p>
+    <a href="/campPlaces/new" class="btn btn-primary">ADD MORE PLACES</a>
+  </div>
+    <div class="row">
+<% places.forEach(function(place,index){ %>
+    
+        <div class="col-md-3 col-sm-6">
+          <div class="img-thumbnail">
+              <img src="<%=place["url"] %>" class="img-fluid">
+          <h4><%= place["name"] %></h4>
+          <a href="/campPlaces/<%= place["_id"] %>" class="btn btn-primary">MORE INFO</a>
+          </div>
+        </div>
+<% }); %>
+    </div>
+</div>
+<%if(noMatch !== null){%>
+    <h4 class="text-center">No Campground found with the given name.Search again</h4>
+      <form class="form-inline mt-4 form-center" action="/campPlaces" method="GET">
+          <div class="form-group mx-sm-3 mb-2">
+          <label for="search" class="sr-only">Search</label>
+          <input type="text" class="form-control" id="search" placeholder="Search" name="search">
+          </div>
+          <button type="submit" class="btn btn-primary mb-2">Submit</button>
+      </form>
+<%}%>
+<% include partials/footer %>
